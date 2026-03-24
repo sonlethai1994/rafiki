@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/son/Desktop/dev/rafiki -type f -name settings*.py)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki status)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki log --oneline)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki checkout -b docs/add-project-documentation)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki add CLAUDE.md ARCHITECTURE.md CONTRIBUTING.md config/CLAUDE.md rafiki/CLAUDE.md rafiki/users/CLAUDE.md rafiki/static/CLAUDE.md rafiki/templates/CLAUDE.md compose/CLAUDE.md webpack/CLAUDE.md docs/CLAUDE.md locale/CLAUDE.md .github/CLAUDE.md .github/PULL_REQUEST_TEMPLATE.md .github/ISSUE_TEMPLATE/bug_report.md .github/ISSUE_TEMPLATE/feature_request.md)"
+    ]
+  }
+}
