@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/son/Desktop/dev/rafiki -type f -name settings*.py)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki status)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki log --oneline)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki checkout -b docs/add-project-documentation)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki add CLAUDE.md ARCHITECTURE.md CONTRIBUTING.md config/CLAUDE.md rafiki/CLAUDE.md rafiki/users/CLAUDE.md rafiki/static/CLAUDE.md rafiki/templates/CLAUDE.md compose/CLAUDE.md webpack/CLAUDE.md docs/CLAUDE.md locale/CLAUDE.md .github/CLAUDE.md .github/PULL_REQUEST_TEMPLATE.md .github/ISSUE_TEMPLATE/bug_report.md .github/ISSUE_TEMPLATE/feature_request.md)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki stash)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki checkout main)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki pull origin main)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; [[ \"$f\" == *.py ]] && uvx ruff check --fix --quiet \"$f\" && uvx ruff format --quiet \"$f\"; } 2>/dev/null || true",
+            "statusMessage": "Ruff: fixing and formatting..."
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; [[ \"$f\" == *.html ]] && uvx djlint \"$f\" --reformat --quiet; } 2>/dev/null || true",
+            "statusMessage": "djLint: reformatting template..."
+          }
+        ]
+      }
+    ]
+  }
+}
