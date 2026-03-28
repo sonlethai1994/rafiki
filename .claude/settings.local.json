@@ -42,7 +42,14 @@
       "Bash(rc=$?)",
       "Bash(echo \"exit: $rc\")",
       "Bash(jq:*)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(ruff check:*)",
+      "Bash(ruff format:*)",
+      "Bash(python3 -m ruff check .)",
+      "Bash(~/.local/bin/pre-commit run:*)",
+      "Bash(for pr:*)",
+      "Bash(do)",
+      "Bash(done)"
     ]
   },
   "hooks": {
