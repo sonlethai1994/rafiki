@@ -21,6 +21,7 @@ Read DRF ViewSets, serializers, and views, then add or update `@extend_schema` a
 ## Annotation patterns
 
 ### ViewSet — annotate all actions at once
+
 ```python
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiResponse
 
@@ -51,6 +52,7 @@ class TaskViewSet(ModelViewSet):
 ```
 
 ### Custom actions
+
 ```python
 @extend_schema(
     summary="Mark task as done",
@@ -66,6 +68,7 @@ def mark_done(self, request, pk=None):
 ```
 
 ### Inline serializer for simple responses
+
 ```python
 from drf_spectacular.utils import inline_serializer
 from rest_framework import serializers
@@ -79,6 +82,7 @@ from rest_framework import serializers
 ```
 
 ### Tagging endpoints by resource
+
 ```python
 @extend_schema(tags=["tasks"])
 class TaskViewSet(ModelViewSet):
@@ -86,6 +90,7 @@ class TaskViewSet(ModelViewSet):
 ```
 
 ### Marking fields in serializers
+
 ```python
 from drf_spectacular.utils import extend_schema_field
 

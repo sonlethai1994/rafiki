@@ -24,23 +24,22 @@ Every HTML form that submits via POST, PUT, PATCH, or DELETE MUST include the CS
 
 ```html
 <!-- GOOD -->
-<form method="post">
-  {% csrf_token %}
-  ...
-</form>
+<form method="post">{% csrf_token %} ...</form>
 ```
 
 Red flags:
+
 - `<form method="post">` without `{% csrf_token %}`
 - AJAX `fetch`/`axios` calls that modify data without including `X-CSRFToken` header
 
 Correct AJAX pattern:
+
 ```javascript
 const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 fetch('/api/tasks/', {
-    method: 'POST',
-    headers: { 'X-CSRFToken': csrfToken, 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+  method: 'POST',
+  headers: { 'X-CSRFToken': csrfToken, 'Content-Type': 'application/json' },
+  body: JSON.stringify(data),
 });
 ```
 
@@ -68,11 +67,11 @@ Red flag: Any `href="/..."` or `action="/..."` that isn't an external URL.
 
 ```html
 <!-- BAD — hardcoded path -->
-<link rel="stylesheet" href="/static/css/main.css">
+<link rel="stylesheet" href="/static/css/main.css" />
 
 <!-- GOOD -->
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}" />
 ```
 
 ### Accessibility (a11y)
@@ -90,9 +89,9 @@ Inline styles bypass the design system and break theming.
 ```html
 <!-- BAD -->
 <div style="color: red; margin-top: 20px;">
-
-<!-- GOOD — use Bootstrap utilities or SCSS classes -->
-<div class="text-danger mt-3">
+  <!-- GOOD — use Bootstrap utilities or SCSS classes -->
+  <div class="text-danger mt-3"></div>
+</div>
 ```
 
 Exception: dynamically generated styles (e.g., progress bar widths) are acceptable.
@@ -102,6 +101,7 @@ Exception: dynamically generated styles (e.g., progress bar widths) are acceptab
 Django auto-escapes template variables, but:
 
 Red flags:
+
 - `{{ variable|safe }}` — only acceptable if the variable is 100% controlled server-side
 - `{% autoescape off %}` blocks
 - JavaScript that injects `innerHTML` with template variables
@@ -121,6 +121,7 @@ Red flags:
 ## How to report
 
 For each issue:
+
 1. File path and line/selector
 2. Issue (one sentence)
 3. Category: **Security** / **Correctness** / **Accessibility** / **Style**

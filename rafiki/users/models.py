@@ -29,10 +29,5 @@ class User(AbstractUser):
     objects: ClassVar[UserManager] = UserManager()
 
     def get_absolute_url(self) -> str:
-        """Get URL for user's detail view.
-
-        Returns:
-            str: URL for user detail.
-
-        """
-        return reverse("users:detail", kwargs={"pk": self.id})
+        """Get URL for user's detail view."""
+        return reverse("api:user-detail", kwargs={"pk": self.id})

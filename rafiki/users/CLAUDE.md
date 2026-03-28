@@ -55,17 +55,17 @@ Factory defined in `tests/factories.py` using `factory-boy`.
 
 ## File map
 
-| File | Purpose |
-|---|---|
-| `models.py` | Custom User model |
-| `managers.py` | CustomUserManager (email normalization) |
-| `adapters.py` | Allauth signup/social adapters |
-| `forms.py` | Signup form (name field) |
-| `views.py` | Detail, Update, Redirect views |
-| `urls.py` | User URL patterns |
-| `admin.py` | Admin registration with allauth integration |
-| `context_processors.py` | Injects allauth settings into templates |
-| `tasks.py` | Celery tasks for user-related async work |
-| `api/views.py` | DRF UserViewSet |
-| `api/serializers.py` | UserSerializer (hyperlinking) |
-| `tests/factories.py` | UserFactory |
+| File                    | Purpose                                     |
+| ----------------------- | ------------------------------------------- |
+| `models.py`             | Custom User model                           |
+| `managers.py`           | CustomUserManager (email normalization)     |
+| `adapters.py`           | Allauth signup/social adapters              |
+| `forms.py`              | Signup form (name field)                    |
+| `views.py`              | Detail, Update, Redirect views              |
+| `urls.py`               | User URL patterns                           |
+| `admin.py`              | Admin registration with allauth integration |
+| `context_processors.py` | Injects allauth settings into templates     |
+| `tasks.py`              | Celery tasks for user-related async work    |
+| `api/views.py`          | DRF UserViewSet                             |
+| `api/serializers.py`    | UserSerializer (hyperlinking)               |
+| `tests/factories.py`    | UserFactory                                 |

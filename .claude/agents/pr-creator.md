@@ -22,6 +22,7 @@ You are a PR creation agent for the Rafiki project. You follow the conventions d
 Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
 
 Examples:
+
 - `feat/add-task-recurrence`
 - `fix/celery-retry-backoff`
 - `docs/update-contributing`
@@ -35,6 +36,7 @@ Examples:
 ```
 
 Examples:
+
 - `feat(tasks): add recurring task support`
 - `fix(celery): use exponential backoff on webhook task`
 
@@ -46,18 +48,23 @@ Same as the commit message first line: `<type>(<scope>): <description>`
 
 ```markdown
 ## Summary
+
 <!-- What this PR does in 2-3 sentences -->
 
 ## Changes
+
 -
 -
 
 ## Testing
+
 <!-- How was this tested? -->
+
 - [ ] Unit tests added/updated
 - [ ] Manual testing in Docker
 
 ## Notes
+
 <!-- Anything reviewers should know -->
 ```
 
@@ -69,6 +76,7 @@ Same as the commit message first line: `<type>(<scope>): <description>`
 4. Verify commits are ahead of main: `git -C /Users/son/Desktop/dev/rafiki log main..HEAD --oneline`
 5. Push branch: `git -C /Users/son/Desktop/dev/rafiki push -u origin <branch>`
 6. Create PR:
+
 ```bash
 gh pr create \
   --title "<type>(<scope>): <description>" \
@@ -76,9 +84,11 @@ gh pr create \
   --base main \
   --head <branch>
 ```
+
 7. Report the PR URL
 
 ## What NOT to do
+
 - Never force-push to `main`
 - Never create a PR from `main` to `main`
 - Never include unrelated changes in the same PR

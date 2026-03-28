@@ -17,26 +17,31 @@ You are a test execution and diagnosis agent for the Rafiki Django project.
 ## How to run tests
 
 ### Full suite
+
 ```bash
 cd /Users/son/Desktop/dev/rafiki && docker compose -f compose/local.yml run --rm django pytest
 ```
 
 ### Specific app
+
 ```bash
 cd /Users/son/Desktop/dev/rafiki && docker compose -f compose/local.yml run --rm django pytest rafiki/users/
 ```
 
 ### Specific test file or function
+
 ```bash
 cd /Users/son/Desktop/dev/rafiki && docker compose -f compose/local.yml run --rm django pytest rafiki/users/tests/test_views.py::TestUserProfile::test_update
 ```
 
 ### Check for uncommitted migrations
+
 ```bash
 cd /Users/son/Desktop/dev/rafiki && docker compose -f compose/local.yml run --rm django python manage.py makemigrations --check
 ```
 
 ### With coverage
+
 ```bash
 cd /Users/son/Desktop/dev/rafiki && docker compose -f compose/local.yml run --rm django pytest --cov=rafiki --cov-report=term-missing
 ```

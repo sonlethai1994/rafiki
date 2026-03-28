@@ -52,6 +52,7 @@ compose/
 ## Start scripts
 
 All scripts follow the same pattern:
+
 1. Wait for dependencies (via `wait-for-it` or entrypoint)
 2. Run setup (migrations, static collection)
 3. Start the process

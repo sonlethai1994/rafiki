@@ -23,17 +23,18 @@ Review migration files and identify operations that are unsafe, irreversible, or
 
 PostgreSQL acquires an `ACCESS EXCLUSIVE` lock for these operations — they block all reads and writes:
 
-| Operation | Risk |
-|---|---|
-| `AddField` with non-null default (PostgreSQL < 11) | Full table rewrite |
-| `AlterField` changing type (e.g., `CharField` → `TextField`) | Full table rewrite |
-| `AddIndex` (standard) | Blocks writes during build |
-| `RemoveField` | Schema change, usually fast |
-| `RenameField` | Fast but application must be updated atomically |
+| Operation                                                    | Risk                                            |
+| ------------------------------------------------------------ | ----------------------------------------------- |
+| `AddField` with non-null default (PostgreSQL < 11)           | Full table rewrite                              |
+| `AlterField` changing type (e.g., `CharField` → `TextField`) | Full table rewrite                              |
+| `AddIndex` (standard)                                        | Blocks writes during build                      |
+| `RemoveField`                                                | Schema change, usually fast                     |
+| `RenameField`                                                | Fast but application must be updated atomically |
 
 **PostgreSQL 11+** (Rafiki's case): `AddField` with a constant default no longer rewrites the table. Still flag if the default is computed or involves a function call.
 
 Safe alternative for large tables:
+
 ```python
 # Use AddIndex with CONCURRENTLY via SeparateDatabaseAndState
 from django.db.migrations.operations import SeparateDatabaseAndState
@@ -68,6 +69,7 @@ user = models.ForeignKey(User, on_delete=models.CASCADE, db_index=True)
 ### Irreversible operations
 
 Flag any migration that has no safe `reverse`:
+
 - `RemoveField` on a field that still has data
 - `DeleteModel`
 - `RenameField` / `RenameModel` without a data migration to backfill
@@ -78,6 +80,7 @@ Flag any migration that has no safe `reverse`:
 Data migrations (using `RunPython`) should be in a separate migration file from schema changes. Mixing them means a schema change can fail mid-migration leaving data in an inconsistent state.
 
 Flag:
+
 ```python
 operations = [
     migrations.AddField(...),       # schema
@@ -98,6 +101,7 @@ Flag any squashed migration that still has `replaces = [...]` — it means the o
 ## How to report
 
 For each issue:
+
 1. Migration file path (e.g., `rafiki/tasks/migrations/0003_add_priority.py`)
 2. Operation name and line
 3. Risk level: **Blocking** (production outage risk) / **Caution** (data risk) / **Note** (best practice)
