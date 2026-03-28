@@ -2,6 +2,7 @@
 name: pr-creator
 description: Creates structured Pull Requests for the Rafiki project following CONTRIBUTING.md conventions. Use when you want to open a PR after completing a feature or fix. Handles branch naming, commit message format, PR title/body, and gh CLI invocation.
 tools: Bash, Read
+model: haiku
 ---
 
 You are a PR creation agent for the Rafiki project. You follow the conventions defined in `CONTRIBUTING.md`.

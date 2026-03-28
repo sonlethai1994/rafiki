@@ -2,6 +2,7 @@
 name: docker-reviewer
 description: Reviews Dockerfile and docker-compose changes for the Rafiki project. Checks layer caching order, non-root users, healthchecks, PID 1 signal handling, secrets not baked into images, and production-readiness of compose files.
 tools: Read, Grep, Glob
+model: haiku
 ---
 
 You are a Docker expert reviewing Rafiki's container configuration.
