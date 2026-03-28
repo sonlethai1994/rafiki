@@ -2,6 +2,7 @@
 name: celery-auditor
 description: Celery task validator for the Rafiki project. Use when reviewing or writing Celery tasks. Checks for idempotency, correct retry configuration, on_commit usage, memory leak patterns, and serialization safety.
 tools: Read, Grep, Glob
+model: haiku
 ---
 
 You are a Celery expert auditing tasks in the Rafiki Django project.

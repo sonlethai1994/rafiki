@@ -166,3 +166,27 @@ GitHub Actions (`.github/workflows/ci.yml`) runs on push/PR to `main`:
 2. **pytest** — builds Docker images, runs migrations, runs full test suite
 
 Dependabot is enabled for weekly dependency updates.
+
+---
+
+## Agents — Quick Reference
+
+Project-specific agents live in `.claude/agents/`. Prefer them over global agents.
+
+| Event | Agent to invoke |
+| ----- | --------------- |
+| Model / queryset written | `django-doctor` |
+| View or API endpoint written | `security-checker` → `code-reviewer` |
+| `tasks.py` modified | `celery-auditor` |
+| Migration file created | `migration-reviewer` |
+| API endpoint added/changed | `api-documenter` |
+| Template or SCSS edited | `frontend-reviewer` |
+| JS/TS file written | `typescript-reviewer` |
+| Dockerfile or compose edited | `docker-reviewer` |
+| Tests to run / fix to verify | `test-runner` |
+| Ready to open PR | `pr-creator` |
+| Complex multi-file feature | `planner` first |
+
+**Django feature pipeline (full):** use the `/feature` skill — runs research → plan → TDD → parallel review automatically.
+
+**Verification loop:** use `/django-verification` — runs migrations check + lint + tests + security audit.
