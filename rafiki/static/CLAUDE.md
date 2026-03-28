@@ -24,9 +24,9 @@ Edit `sass/project.scss` or create a new partial and import it:
 
 ```scss
 // project.scss
-@import "custom_bootstrap_vars";
-@import "bootstrap/scss/bootstrap";
-@import "partials/my-component";  // new partial
+@import 'custom_bootstrap_vars';
+@import 'bootstrap/scss/bootstrap';
+@import 'partials/my-component'; // new partial
 ```
 
 ## Adding JavaScript
@@ -34,13 +34,13 @@ Edit `sass/project.scss` or create a new partial and import it:
 Import in `js/project.js`:
 
 ```js
-import "./my-module";
+import './my-module';
 ```
 
 For third-party libraries, add to `js/vendors.js`:
 
 ```js
-import "my-library";
+import 'my-library';
 ```
 
 Install via npm:

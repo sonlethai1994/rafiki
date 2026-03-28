@@ -1,0 +1,88 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/son/Desktop/dev/rafiki -type f -name settings*.py)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki status)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki log --oneline)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki checkout -b docs/add-project-documentation)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki add CLAUDE.md ARCHITECTURE.md CONTRIBUTING.md config/CLAUDE.md rafiki/CLAUDE.md rafiki/users/CLAUDE.md rafiki/static/CLAUDE.md rafiki/templates/CLAUDE.md compose/CLAUDE.md webpack/CLAUDE.md docs/CLAUDE.md locale/CLAUDE.md .github/CLAUDE.md .github/PULL_REQUEST_TEMPLATE.md .github/ISSUE_TEMPLATE/bug_report.md .github/ISSUE_TEMPLATE/feature_request.md)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki stash)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki checkout main)",
+      "Bash(git -C /Users/son/Desktop/dev/rafiki pull origin main)",
+      "Bash(python3 -m json.tool)",
+      "Bash(mkdir:*)",
+      "Bash(wc:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(uv run:*)",
+      "Bash(docker compose:*)",
+      "Bash(ruff --version)",
+      "Bash(mypy --version)",
+      "Bash(uvx ruff:*)",
+      "Bash(docker info:*)",
+      "Bash(just up:*)",
+      "Read(//var/run/**)",
+      "Bash(docker context:*)",
+      "Bash(just logs:*)",
+      "Bash(curl -s http://localhost:8000/api/schema/ -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:8000/api/docs/ -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:8000/_allauth/browser/v1/auth/session -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:8000/api/ -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:8000/api/docs/)",
+      "Bash(curl -sv http://localhost:8000/api/docs/)",
+      "Bash(curl -s http://localhost:8000/_allauth/browser/v1/auth/session -w \"\\\\n%{http_code}\\\\n\")",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh run:*)",
+      "Bash(git reset:*)",
+      "Skill(update-config)",
+      "Bash(rc=$?)",
+      "Bash(echo \"exit: $rc\")",
+      "Bash(jq:*)",
+      "Bash(gh api:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "docker compose -f /Users/son/Desktop/dev/rafiki/docker-compose.local.yml run --rm django pre-commit run --all-files 1>&2 || printf '{\"continue\":false,\"stopReason\":\"pre-commit failed — fix the lint errors above and retry the commit\"}'",
+            "if": "Bash(git commit*)",
+            "timeout": 120,
+            "statusMessage": "Running pre-commit checks..."
+          },
+          {
+            "type": "command",
+            "command": "docker compose -f /Users/son/Desktop/dev/rafiki/docker-compose.local.yml run --rm django pytest --tb=short -q 1>&2 || printf '{\"continue\":false,\"stopReason\":\"pytest failed — fix the failing tests above and retry the commit\"}'",
+            "if": "Bash(git commit*)",
+            "timeout": 300,
+            "statusMessage": "Running pytest..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; [[ \"$f\" == *.py ]] && uvx ruff check --fix --quiet \"$f\" && uvx ruff format --quiet \"$f\"; } 2>/dev/null || true",
+            "statusMessage": "Ruff: fixing and formatting..."
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; [[ \"$f\" == *.html ]] && uvx djlint \"$f\" --reformat --quiet; } 2>/dev/null || true",
+            "statusMessage": "djLint: reformatting template..."
+          }
+        ]
+      }
+    ]
+  }
+}

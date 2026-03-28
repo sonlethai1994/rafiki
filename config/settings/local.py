@@ -1,7 +1,6 @@
 from .base import *  # noqa: F403
 from .base import INSTALLED_APPS
 from .base import MIDDLEWARE
-from .base import WEBPACK_LOADER
 from .base import env
 
 # GENERAL
@@ -79,8 +78,12 @@ INSTALLED_APPS += ["django_extensions"]
 
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-eager-propagates
 CELERY_TASK_EAGER_PROPAGATES = True
-# django-webpack-loader
+# CORS
 # ------------------------------------------------------------------------------
-WEBPACK_LOADER["DEFAULT"]["CACHE"] = not DEBUG
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+]
+CORS_ALLOW_CREDENTIALS = True
 # Your stuff...
 # ------------------------------------------------------------------------------

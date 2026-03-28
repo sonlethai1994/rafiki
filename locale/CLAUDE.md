@@ -4,10 +4,10 @@ Internationalization (i18n) translation files.
 
 ## Supported languages
 
-| Code | Language |
-|---|---|
-| `en_US` | English (default) |
-| `fr_FR` | French |
+| Code    | Language             |
+| ------- | -------------------- |
+| `en_US` | English (default)    |
+| `fr_FR` | French               |
 | `pt_BR` | Brazilian Portuguese |
 
 ## How translations work
@@ -19,6 +19,7 @@ Django uses `gettext`. Strings are marked in Python and templates, extracted to 
 ### Mark strings for translation
 
 In Python:
+
 ```python
 from django.utils.translation import gettext_lazy as _
 
@@ -26,10 +27,10 @@ label = _("My string")
 ```
 
 In templates:
+
 ```html
-{% load i18n %}
-{% trans "My string" %}
-{% blocktrans %}Hello {{ name }}{% endblocktrans %}
+{% load i18n %} {% trans "My string" %} {% blocktrans %}Hello {{ name }}{%
+endblocktrans %}
 ```
 
 ### Extract strings

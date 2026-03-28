@@ -18,6 +18,7 @@ Personal AI-powered planner built with Django 6.0. Automate tasks, schedule cron
 ## Local Development
 
 All local development runs in Docker. Requires:
+
 - `.envs/.local/.django`
 - `.envs/.local/.postgres`
 
@@ -134,24 +135,24 @@ webpack/
 
 ## Services & Ports
 
-| Service | Port | Notes |
-|---|---|---|
-| Django | 8000 | Main app |
-| Flower | 5555 | Celery task monitor |
-| Webpack | 3000 | Dev server (live reload) |
-| PostgreSQL | internal | |
-| Redis | internal | Broker + cache |
+| Service    | Port     | Notes                    |
+| ---------- | -------- | ------------------------ |
+| Django     | 8000     | Main app                 |
+| Flower     | 5555     | Celery task monitor      |
+| Webpack    | 3000     | Dev server (live reload) |
+| PostgreSQL | internal |                          |
+| Redis      | internal | Broker + cache           |
 
 ---
 
 ## Environment Files
 
-| File | Purpose |
-|---|---|
-| `.envs/.local/.django` | Local Django settings (secret key, Redis, Flower creds) |
-| `.envs/.local/.postgres` | Local DB credentials |
-| `.envs/.production/.django` | Production settings (Sentry DSN, Mailgun, allowed hosts) |
-| `.envs/.production/.postgres` | Production DB credentials |
+| File                          | Purpose                                                  |
+| ----------------------------- | -------------------------------------------------------- |
+| `.envs/.local/.django`        | Local Django settings (secret key, Redis, Flower creds)  |
+| `.envs/.local/.postgres`      | Local DB credentials                                     |
+| `.envs/.production/.django`   | Production settings (Sentry DSN, Mailgun, allowed hosts) |
+| `.envs/.production/.postgres` | Production DB credentials                                |
 
 These are **never committed** to git.
 

@@ -32,11 +32,11 @@ SECRET_KEY = "hardcoded-secret"
 
 Settings are split by environment. `base.py` is always loaded; the active settings module is set via `DJANGO_SETTINGS_MODULE`.
 
-| Module | When used |
-|---|---|
-| `config.settings.local` | Local Docker dev |
-| `config.settings.production` | Production |
-| `config.settings.test` | pytest |
+| Module                       | When used        |
+| ---------------------------- | ---------------- |
+| `config.settings.local`      | Local Docker dev |
+| `config.settings.production` | Production       |
+| `config.settings.test`       | pytest           |
 
 ## Adding a new setting
 
@@ -63,16 +63,16 @@ The router is included at `/api/` in `urls.py`. API schema is auto-generated at 
 
 ## URLs
 
-| Path | Purpose |
-|---|---|
-| `/` | Home page |
-| `/about/` | About page |
-| `/users/` | User views (allauth + custom) |
-| `/api/` | DRF API (router) |
-| `/api/schema/` | OpenAPI schema (drf-spectacular) |
-| `/api/docs/` | Swagger UI |
-| `/api/auth-token/` | Token auth endpoint |
-| `/<DJANGO_ADMIN_URL>/` | Admin (URL set via env var) |
+| Path                   | Purpose                          |
+| ---------------------- | -------------------------------- |
+| `/`                    | Home page                        |
+| `/about/`              | About page                       |
+| `/users/`              | User views (allauth + custom)    |
+| `/api/`                | DRF API (router)                 |
+| `/api/schema/`         | OpenAPI schema (drf-spectacular) |
+| `/api/docs/`           | Swagger UI                       |
+| `/api/auth-token/`     | Token auth endpoint              |
+| `/<DJANGO_ADMIN_URL>/` | Admin (URL set via env var)      |
 
 ## Celery
 
